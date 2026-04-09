@@ -1,12 +1,11 @@
 import cv2
 import torch
 import numpy as np
-import time
 
 device = torch.device("xpu")
-x_steps = 2560
-y_steps = 1440
-iterations = 350
+x_steps = 1500
+y_steps = 1000
+iterations = 100
 
 windows = [[-2, 1, -1, 1]]
 
