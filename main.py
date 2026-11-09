@@ -35,8 +35,8 @@ def getImage():
     img_norm = cv2.normalize(img.detach().cpu().numpy(), None, 0, 255, cv2.NORM_MINMAX)
     img_uint8 = img_norm.astype(np.uint8)
 
-    colored = cv2.applyColorMap(img_uint8, cv2.COLORMAP_JET)
-    #colored = cv2.applyColorMap(img_uint8, cv2.COLORMAP_OCEAN)
+    #colored = cv2.applyColorMap(img_uint8, cv2.COLORMAP_JET)
+    colored = cv2.applyColorMap(img_uint8, cv2.COLORMAP_OCEAN)
 
     return colored
 
@@ -60,13 +60,18 @@ def mouse_callback(event, x, y, flags, param):
         y_range /= 6
 
         windows.append([x - x_range, x + x_range, y - y_range, y + y_range])
-        cv2.imshow("mandelbrot", getImage())
+        img = getImage()
+        cv2.imwrite('output_image.jpg', img)
+        cv2.imshow("mandelbrot", img)
 
     elif event == cv2.EVENT_RBUTTONDOWN:
         if len(windows) == 1:
             return
         windows.remove(windows[-1])
-        cv2.imshow("mandelbrot", getImage())
+        img = getImage()
+        cv2.imwrite('output_image.jpg', img)
+        cv2.imshow("mandelbrot", img)
+
 
 
 cv2.imshow("mandelbrot", getImage())
